@@ -1,0 +1,1947 @@
+<html class="scroll-smooth" lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Radio Raipuria - Live Folk Radio from Raipur, Chhattisgarh
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&amp;family=Kalam&amp;family=Montserrat:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fff8e7;
+      color: #3b6a47;
+    }
+    .font-kalam {
+      font-family: 'Kalam', cursive;
+    }
+    .font-montserrat {
+      font-family: 'Montserrat', sans-serif;
+    }
+    /* Glassmorphism widget */
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    }
+    /* Ripple animation on play button hover */
+    .ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .ripple:after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      box-shadow: 0 0 15px 5px #b33a3a;
+      opacity: 0;
+      animation: ripple 1.5s infinite;
+      animation-play-state: paused;
+    }
+    .ripple:hover:after {
+      animation-play-state: running;
+      opacity: 1;
+    }
+    @keyframes ripple {
+      0% {
+        transform: scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1.6);
+        opacity: 0;
+      }
+    }
+    /* Scroll down chevron animation */
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(8px);
+      }
+    }
+    .bounce {
+      animation: bounce 2s infinite;
+    }
+    /* Polaroid floating animation */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .float-anim {
+      animation: floatUpDown 6s ease-in-out infinite;
+    }
+    /* Waveform animation for podcast hover */
+    .waveform {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 12px;
+      background: repeating-linear-gradient(
+        90deg,
+        #b33a3a,
+        #b33a3a 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      background-size: 20px 12px;
+      animation: wave 1.2s linear infinite;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 9999px;
+    }
+    @keyframes wave {
+      0% {
+        background-position-x: 0;
+      }
+      100% {
+        background-position-x: 20px;
+      }
+    }
+    .podcast-card:hover .waveform {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+    /* Radio wave animation for feedback quotes */
+    .radio-wave {
+      position: relative;
+      width: 100%;
+      height: 20px;
+      margin-top: 0.5rem;
+      overflow: visible;
+    }
+    .radio-wave svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      stroke: #b33a3a;
+      stroke-width: 2;
+      fill: none;
+      animation: waveRadio 2s ease-in-out infinite;
+    }
+    @keyframes waveRadio {
+      0%, 100% {
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dashoffset: 20;
+      }
+    }
+    /* Sticky mini player on mobile */
+    @media (max-width: 640px) {
+      #mini-player {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #b33a3a;
+        color: #fff8e7;
+        z-index: 50;
+        box-shadow: 0 -4px 10px rgba(179, 58, 58, 0.7);
+      }
+    }
+    /* Modal backdrop */
+    .modal-backdrop {
+      background-color: rgba(0,0,0,0.6);
+    }
+    /* Hide scrollbar for horizontal timeline */
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Additional colors */
+    .bg-warmCream {
+      background-color: #fff8e7;
+    }
+    .text-forestGreen {
+      color: #3b6a47;
+    }
+    .bg-primaryRed {
+      background-color: #b33a3a;
+    }
+    .text-primaryRed {
+      color: #b33a3a;
+    }
+    .bg-mustardAccent {
+      background-color: #e6b325;
+    }
+    .text-warmCream {
+      color: #fff8e7;
+    }
+    /* Culture section fixes */
+    #culture {
+      position: relative;
+      max-width: 1120px;
+      margin: auto;
+      padding: 4rem 1.5rem 6rem;
+      background-color: #fff7e6;
+      overflow: hidden;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tribal-bg {
+      position: absolute;
+      width: 15rem;
+      height: 15rem;
+      opacity: 0.1;
+      pointer-events: none;
+      user-select: none;
+      animation-duration: 6s;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      z-index: 0;
+    }
+    .top-left {
+      top: 0;
+      left: 0;
+      animation-name: float;
+    }
+    .bottom-right {
+      bottom: 0;
+      right: 0;
+      animation-name: floatReverse;
+    }
+    .culture-text {
+      flex: 1 1 320px;
+      max-width: 600px;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(255 255 255 / 0.3);
+      border: 1px solid rgba(255 255 255 / 0.2);
+      box-shadow: 0 10px 30px rgb(0 0 0 / 0.15);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      overflow: hidden;
+      color: #254A2B;
+      font-family: 'Kalam', cursive;
+    }
+    .tribal-motif {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 5rem;
+      opacity: 0.1;
+      transform: rotate(12deg);
+      pointer-events: none;
+      user-select: none;
+    }
+    .culture-text h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #B33A3A;
+    }
+    .divider {
+      width: 6rem;
+      height: 0.25rem;
+      background-color: #E6B325;
+      border-radius: 9999px;
+      margin-bottom: 1.5rem;
+      animation: pulse 2s infinite;
+    }
+    .culture-text p {
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      max-width: 400px;
+    }
+    .btn-cta {
+      background-color: #E6B325;
+      color: #254A2B;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      display: inline-block;
+      box-shadow: 0 6px 10px rgba(230, 179, 37, 0.5);
+      text-decoration: none;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 15px rgba(230, 179, 37, 0.7);
+    }
+    .culture-video {
+      flex: 1 1 320px;
+      max-width: 600px;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+    }
+    .swiper-container {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+    }
+    .swiper-wrapper {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 0.5rem;
+    }
+    .swiper-slide {
+      flex-shrink: 0;
+      width: 90%;
+      max-width: 320px;
+      position: relative;
+      cursor: pointer;
+      border-radius: 1rem;
+      overflow: hidden;
+      scroll-snap-align: start;
+      transition: transform 0.3s ease;
+    }
+    .swiper-slide video {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 1rem;
+      display: block;
+    }
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      color: white;
+      font-weight: 600;
+      font-size: 1.125rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1 !important;
+      border-radius: 1rem;
+      pointer-events: none;
+      user-select: none;
+    }
+    /* Animations */
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes floatReverse {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
+      100% { transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    /* Responsive for tablets and below */
+    @media (max-width: 768px) {
+      #culture {
+        flex-direction: column;
+        padding: 3rem 1rem;
+      }
+      .culture-text, .culture-video {
+        max-width: 100%;
+        width: 100%;
+        flex: none;
+      }
+      .culture-text h2 {
+        font-size: 2rem;
+      }
+      .culture-text p {
+        max-width: 100%;
+        font-size: 1rem;
+      }
+      .tribal-motif {
+        width: 3rem;
+        top: 0.5rem;
+        right: 0.5rem;
+      }
+      .swiper-container {
+        height: auto;
+        gap: 1rem;
+        padding-bottom: 0.5rem;
+      }
+      .swiper-slide {
+        width: 80%;
+        max-width: none;
+        margin-right: 0.75rem;
+      }
+      .swiper-slide video {
+        height: 160px;
+      }
+    }
+    /* Remove annoying red underline on podcast cards hover */
+    .podcast-card:hover, .podcast-card:focus {
+      box-shadow: 0 10px 20px rgb(179 58 58 / 0.4);
+      transform: translateY(-6px);
+      outline: none;
+      border-bottom: none !important;
+    }
+  </style>
+ </head>
+ <body class="relative bg-warmCream text-forestGreen">
+  <!-- 1. HERO SECTION -->
+  <section aria-label="Hero section with live radio player and background slideshow" class="relative min-h-screen w-full overflow-hidden flex items-center justify-center bg-warmCream px-4 sm:px-8 md:px-12" id="hero">
+   <!-- Background slideshow container -->
+   <div aria-hidden="true" class="absolute inset-0 z-0 overflow-hidden rounded-none" id="hero-bg-container">
+    <img alt="Vibrant tribal dance in Chhattisgarh with colorful traditional costumes and energetic movement" class="absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-1000" src="https://storage.googleapis.com/a1aa/image/a99ab5ac-ed70-4493-a40b-17b3bee682e0.jpg"/>
+    <img alt="Vintage microphone in a radio studio with warm lighting and retro equipment" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000" src="https://storage.googleapis.com/a1aa/image/310f32a4-874f-4836-0781-cdb890182b34.jpg"/>
+    <img alt="Crowd cheering at a music event with hands raised and colorful lights" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000" src="https://storage.googleapis.com/a1aa/image/d649646e-9c4e-45c1-2e96-a5c3e1e85eae.jpg"/>
+    <img alt="RJ Maya speaking in studio with microphone and headphones, focused and smiling" class="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-1000" src="https://storage.googleapis.com/a1aa/image/e604c356-3ae0-4ea9-ce81-0b99cd691130.jpg"/>
+   </div>
+   <!-- Glassmorphism widget -->
+   <div aria-atomic="true" aria-label="Live radio player controls" aria-live="polite" class="glass relative z-10 max-w-lg w-full p-6 sm:p-8 md:p-10 flex flex-col items-center text-center shadow-lg backdrop-blur-xl bg-white/20 rounded-lg" role="region">
+    <!-- Glowing LIVE badge -->
+    <div aria-label="Live broadcast indicator" class="inline-flex items-center bg-primaryRed text-warmCream font-bold rounded-full px-4 py-1 mb-6 shadow-lg">
+     <i aria-hidden="true" class="fas fa-broadcast-tower mr-2 animate-pulse">
+     </i>
+     LIVE
+    </div>
+    <!-- Big Play Button -->
+    <button aria-label="Play Live Radio" class="ripple mb-6 w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-primaryRed flex items-center justify-center text-warmCream text-3xl sm:text-4xl shadow-lg hover:scale-110 transition-transform duration-300 focus:outline-none focus:ring-4 focus:ring-primaryRed" id="livePlayBtn" type="button">
+     <i aria-hidden="true" class="fas fa-play" id="livePlayIcon">
+     </i>
+    </button>
+    <!-- Now Playing Info -->
+    <p class="text-base sm:text-lg font-kalam mb-6 text-warmCream drop-shadow-lg" id="nowPlayingText">
+     Now Playing:
+     <span class="font-bold">
+      RJ Maya - Raipuria Beats
+     </span>
+    </p>
+    <!-- Buttons -->
+    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full justify-center">
+     <a class="flex items-center justify-center gap-2 bg-mustardAccent hover:bg-yellow-400 text-forestGreen font-semibold rounded-full px-6 py-2 shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-mustardAccent" href="#" id="listenLiveLink" rel="noopener noreferrer" role="link" target="_blank">
+      <i aria-hidden="true" class="fas fa-headphones-alt">
+      </i>
+      Listen Live
+     </a>
+     <a class="flex items-center justify-center gap-2 bg-forestGreen hover:bg-green-700 text-warmCream font-semibold rounded-full px-6 py-2 shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-forestGreen" href="#events" role="link">
+      <i aria-hidden="true" class="fas fa-calendar-alt">
+      </i>
+      Show Schedule
+     </a>
+    </div>
+   </div>
+   <!-- Scroll down chevron -->
+   <a aria-label="Scroll down to Explore Culture" class="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center text-warmCream font-kalam cursor-pointer select-none" href="#culture" role="link">
+    <svg aria-hidden="true" class="w-6 sm:w-8 h-6 sm:h-8 mb-1 animate-bounce" fill="none" focusable="false" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+     <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round">
+     </path>
+    </svg>
+    <span class="text-xs sm:text-sm tracking-wide">
+     Explore Culture
+    </span>
+   </a>
+  </section>
+  <script>
+   // Background slideshow logic
+    const images = document.querySelectorAll('#hero-bg-container img');
+    let current = 0;
+    setInterval(() => {
+      images[current].classList.remove('opacity-100');
+      images[current].classList.add('opacity-0');
+      current = (current + 1) % images.length;
+      images[current].classList.remove('opacity-0');
+      images[current].classList.add('opacity-100');
+    }, 8000);
+
+    // Live audio player logic
+    const livePlayBtn = document.getElementById('livePlayBtn');
+    const livePlayIcon = document.getElementById('livePlayIcon');
+    const nowPlayingText = document.getElementById('nowPlayingText');
+    const listenLiveLink = document.getElementById('listenLiveLink');
+
+    const liveStreamUrl = "https://stream.zeno.fm/tjvdomsjkyzuv?cto-uid=ce38c837-5e56-4471-96db-3f2e664f60d6-67e0dc2a-494e&amp;an-uid=3714976574480104354&amp;triton-uid=cookie%3Aebfa7746-fdb5-47d8-bf19-6223094e9eec&amp;dbm-uid=CAESEF6P-p18C9HMlLp0m6G9Muw&amp;dyn-uid=8237369708151774914&amp;ttd-uid=e3034741-e3e4-4d1a-94ca-58e1cb2a0665&amp;adtonosListenerId=01JWFWGJD079PGBNJQ2PMXJT1M&amp;aw_0_req_lsid=06360fcade8990989373c759e0abee04";
+    const liveAudio = new Audio(liveStreamUrl);
+    liveAudio.preload = "none";
+    liveAudio.crossOrigin = "anonymous";
+
+    let isPlaying = false;
+
+    livePlayBtn.addEventListener('click', () => {
+      if (!isPlaying) {
+        liveAudio.play().then(() => {
+          isPlaying = true;
+          livePlayIcon.classList.remove('fa-play');
+          livePlayIcon.classList.add('fa-pause');
+          nowPlayingText.innerHTML = `Now Playing: <span class="font-bold">RJ Maya - Bhuiyan Beats</span>`;
+          listenLiveLink.href = liveStreamUrl;
+        }).catch((err) => {
+          alert("Unable to play live stream. Please try again later.");
+          console.error(err);
+        });
+      } else {
+        liveAudio.pause();
+        isPlaying = false;
+        livePlayIcon.classList.remove('fa-pause');
+        livePlayIcon.classList.add('fa-play');
+        nowPlayingText.innerHTML = `Now Playing: <span class="font-bold">RJ Maya - Bhuiyan Beats</span>`;
+        listenLiveLink.href = "#";
+      }
+    });
+
+    window.addEventListener('beforeunload', () => {
+      if (isPlaying) {
+        liveAudio.pause();
+      }
+    });
+  </script>
+  <!-- 2. CULTURE FEATURE BLOCK -->
+  <section aria-label="Culture showcase section" class="relative max-w-7xl mx-auto p-6 sm:p-12 bg-[#fff7e6] rounded-3xl flex flex-wrap gap-8 justify-center items-center overflow-hidden" id="culture">
+   <!-- Decorative tribal background images -->
+   <img alt="Decorative tribal pattern in warm beige tones" aria-hidden="true" class="absolute top-0 left-0 w-60 h-60 opacity-10 pointer-events-none select-none animate-float" src="https://storage.googleapis.com/a1aa/image/6850c925-a949-49af-87b2-24f869a30eb6.jpg" style="animation-duration: 6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite;"/>
+   <img alt="Decorative tribal pattern in warm beige tones" aria-hidden="true" class="absolute bottom-0 right-0 w-60 h-60 opacity-10 pointer-events-none select-none animate-float-reverse" src="https://storage.googleapis.com/a1aa/image/6850c925-a949-49af-87b2-24f869a30eb6.jpg" style="animation-duration: 6s; animation-timing-function: ease-in-out; animation-iteration-count: infinite;"/>
+   <!-- Left Writeup -->
+   <div class="flex-1 max-w-lg bg-white/30 backdrop-blur-md border border-white/20 rounded-3xl p-10 relative text-[#254A2B] font-kalam shadow-lg">
+    <img alt="Tribal motif border in light green" class="absolute top-4 right-4 w-20 opacity-10 pointer-events-none select-none rotate-12" src="https://upload.wikimedia.org/wikipedia/commons/9/94/Warli_border.svg"/>
+    <h2 class="font-montserrat font-extrabold text-4xl mb-4 text-[#B33A3A]">
+     Hamar Bhuiyan Showcase
+    </h2>
+    <div class="w-24 h-1 rounded-full bg-[#E6B325] mb-8 animate-pulse">
+    </div>
+    <p class="text-lg max-w-md mb-8 leading-relaxed">
+     🎨 Experience how Raipur breathes culture – from folk rhythms to dialects, a reel-by-reel journey into the heart of Chhattisgarh.
+    </p>
+    <a class="inline-block bg-[#E6B325] text-[#254A2B] font-semibold rounded-full px-8 py-3 shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-lg font-montserrat" href="#">
+     Suno, Samjho, Mehsoos Karo →
+    </a>
+   </div>
+   <!-- Right: Reels-style Video Slider -->
+   <div class="flex-1 max-w-lg w-full relative rounded-3xl shadow-xl overflow-x-auto scrollbar-hide" style="scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;">
+    <div class="flex gap-6 px-4 py-2">
+     <div aria-label="Tribal Art in Motion video reel" class="relative flex-shrink-0 w-72 rounded-3xl overflow-hidden cursor-pointer snap-start" role="button" tabindex="0">
+      <video autoplay loop muted playsinline class="w-full h-48 object-cover rounded-3xl" src="https://placehold.co/600x400?text=Tribal+Art"></video>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white font-semibold text-lg rounded-3xl pointer-events-none select-none">
+       🎨 Tribal Art in Motion
+      </div>
+     </div>
+     <div aria-label="Local Dialects video reel" class="relative flex-shrink-0 w-72 rounded-3xl overflow-hidden cursor-pointer snap-start" role="button" tabindex="0">
+      <video autoplay loop muted playsinline class="w-full h-48 object-cover rounded-3xl" src="https://placehold.co/600x400?text=Local+Voices"></video>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white font-semibold text-lg rounded-3xl pointer-events-none select-none">
+       🗣️ Local Dialects
+      </div>
+     </div>
+     <div aria-label="RJ Studio BTS video reel" class="relative flex-shrink-0 w-72 rounded-3xl overflow-hidden cursor-pointer snap-start" role="button" tabindex="0">
+      <video autoplay loop muted playsinline class="w-full h-48 object-cover rounded-3xl" src="https://placehold.co/600x400?text=BTS+Recording"></video>
+      <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-white font-semibold text-lg rounded-3xl pointer-events-none select-none">
+       🎤 RJ Studio BTS
+      </div>
+     </div>
+    </div>
+   </div>
+  </section>
+  <!-- 3. LIVE + UPCOMING SHOWS -->
+  <section aria-label="Live and upcoming radio shows" class="max-w-7xl mx-auto px-6 py-16 bg-warmCream" id="shows">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed" style="color:#B33A3A;">
+    Your Radio Diary
+   </h2>
+   <!-- Filters -->
+   <form aria-label="Filter shows by genre, RJ, and day" class="flex flex-col sm:flex-row gap-4 mb-4 max-w-4xl items-center" id="showsFilterForm">
+    <select aria-label="Filter by Genre" class="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" name="genre" style="font-family: 'Montserrat', sans-serif;">
+     <option value="">
+      🔍 Genre
+     </option>
+     <option value="folk">
+      Folk
+     </option>
+     <option value="romance">
+      Romance
+     </option>
+     <option value="talks">
+      Talks
+     </option>
+    </select>
+    <select aria-label="Filter by RJ" class="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" name="rj" style="font-family: 'Montserrat', sans-serif;">
+     <option value="">
+      📻 RJ
+     </option>
+     <option value="maya">
+      RJ Maya
+     </option>
+     <option value="ravi">
+      RJ Ravi
+     </option>
+     <option value="neha">
+      RJ Neha
+     </option>
+    </select>
+    <select aria-label="Filter by Day" class="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" name="day" style="font-family: 'Montserrat', sans-serif;">
+     <option value="">
+      📆 Day
+     </option>
+     <option value="monday">
+      Monday
+     </option>
+     <option value="tuesday">
+      Tuesday
+     </option>
+     <option value="wednesday">
+      Wednesday
+     </option>
+     <option value="thursday">
+      Thursday
+     </option>
+     <option value="friday">
+      Friday
+     </option>
+     <option value="saturday">
+      Saturday
+     </option>
+     <option value="sunday">
+      Sunday
+     </option>
+    </select>
+    <button class="ml-2 bg-gray-200 hover:bg-gray-300 rounded px-4 py-2 text-gray-700 font-semibold" id="clearFiltersBtn" type="button">
+     Clear Filters
+    </button>
+   </form>
+   <div class="flex flex-col lg:flex-row gap-8">
+    <!-- Current Show Large Card -->
+    <article aria-label="Current live show card" class="relative flex-1 rounded-xl shadow-lg overflow-hidden bg-gradient-to-tr from-maroon via-purple to-amber" id="currentShowCard" style="background: linear-gradient(135deg, #800000, #6a0dad, #ffbf00);">
+     <img alt="RJ Maya hosting Bhuiyan Beats live show with blurred edges and warm colors" aria-hidden="true" class="w-full h-64 object-cover filter blur-sm scale-105" id="currentShowImg" src="https://storage.googleapis.com/a1aa/image/6af910c3-662e-4ea2-d283-4127e8ac6f23.jpg"/>
+     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-6">
+      <h3 class="text-3xl font-bold text-warmCream mb-2 font-montserrat" id="currentShowTitle">
+       Radio Raipuria - Live Now
+      </h3>
+      <p class="text-warmCream font-kalam text-lg mb-4" id="currentShowDesc">
+       Hosted by RJ Maya — Folk &amp; Culture
+      </p>
+      <button aria-label="Listen to Bhuiyan Beats live" class="inline-flex items-center gap-2 bg-primaryRed hover:bg-red-700 text-warmCream font-semibold rounded-full px-5 py-2 shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="currentShowListenBtn" style="background-color:#B33A3A;" type="button">
+       <i aria-hidden="true" class="fas fa-play">
+       </i>
+       Listen Now
+      </button>
+     </div>
+    </article>
+    <!-- Upcoming Shows Grid -->
+    <div aria-label="Upcoming shows list" class="grid grid-cols-1 sm:grid-cols-3 gap-6 flex-1" id="upcomingShowsGrid" role="list">
+     <article class="show-card rounded-lg shadow-lg p-6 flex flex-col justify-between" data-day="saturday" data-desc="Saturday 6 PM - 8 PM | RJ Ravi" data-genre="folk" data-img="https://storage.googleapis.com/a1aa/image/650df55c-9a86-4ebc-6cd2-fa266a9941e6.jpg" data-rj="ravi" data-title="Folk Fiesta" role="listitem" style="background-color:#FFFBCC; border:4px solid #E6B325;" tabindex="0">
+      <img alt="Upcoming folk music show with traditional instruments and performers" class="rounded-md mb-4 object-cover h-32 w-full" src="https://storage.googleapis.com/a1aa/image/650df55c-9a86-4ebc-6cd2-fa266a9941e6.jpg"/>
+      <h4 class="text-xl font-bold text-primaryRed" style="color:#B33A3A;">
+       Folk Fiesta
+      </h4>
+      <p class="font-kalam mb-4">
+       Saturday 6 PM - 8 PM
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       RJ Ravi
+      </p>
+     </article>
+     <article class="show-card rounded-lg shadow-lg p-6 flex flex-col justify-between" data-day="friday" data-desc="Friday 8 PM - 10 PM | RJ Neha" data-genre="romance" data-img="https://storage.googleapis.com/a1aa/image/d0fae7c0-2c66-45f8-e2a2-628b923ca6df.jpg" data-rj="neha" data-title="Love Lines" role="listitem" style="background-color:#FECACA; border:4px solid #B33A3A;" tabindex="0">
+      <img alt="Upcoming romance music show with heart and love theme" class="rounded-md mb-4 object-cover h-32 w-full" src="https://storage.googleapis.com/a1aa/image/d0fae7c0-2c66-45f8-e2a2-628b923ca6df.jpg"/>
+      <h4 class="text-xl font-bold text-primaryRed" style="color:#B33A3A;">
+       Love Lines
+      </h4>
+      <p class="font-kalam mb-4">
+       Friday 8 PM - 10 PM
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       RJ Neha
+      </p>
+     </article>
+     <article class="show-card rounded-lg shadow-lg p-6 flex flex-col justify-between" data-day="sunday" data-desc="Sunday 4 PM - 6 PM | RJ Maya" data-genre="talks" data-img="https://storage.googleapis.com/a1aa/image/1b5f447e-5371-43bd-589e-4c28cdd76d4f.jpg" data-rj="maya" data-title="Desi Talks" role="listitem" style="background-color:#BFDBFE; border:4px solid #3B82F6;" tabindex="0">
+      <img alt="Upcoming talk show with microphone and discussion theme" class="rounded-md mb-4 object-cover h-32 w-full" src="https://storage.googleapis.com/a1aa/image/1b5f447e-5371-43bd-589e-4c28cdd76d4f.jpg"/>
+      <h4 class="text-xl font-bold text-primaryRed" style="color:#B33A3A;">
+       Desi Talks
+      </h4>
+      <p class="font-kalam mb-4">
+       Sunday 4 PM - 6 PM
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       RJ Maya
+      </p>
+     </article>
+    </div>
+   </div>
+   <!-- No results message -->
+   <p aria-live="assertive" class="hidden text-center text-lg font-semibold text-primaryRed mt-8" id="noResultsMsg" role="alert" style="color:#B33A3A;">
+    No shows found matching your filter.
+   </p>
+   <script>
+    (() => {
+        const showsFilterForm = document.getElementById('showsFilterForm');
+        const showCards = Array.from(document.querySelectorAll('.show-card'));
+        const noResultsMsg = document.getElementById('noResultsMsg');
+
+        const currentShowImg = document.getElementById('currentShowImg');
+        const currentShowTitle = document.getElementById('currentShowTitle');
+        const currentShowDesc = document.getElementById('currentShowDesc');
+
+        const defaultShow = {
+          img: "https://storage.googleapis.com/a1aa/image/6af910c3-662e-4ea2-d283-4127e8ac6f23.jpg",
+          title: "Bhuiyan Beats - Live Now",
+          desc: "Hosted by RJ Maya — Folk & Culture"
+        };
+
+        function filterShows() {
+          const genre = showsFilterForm.genre.value.trim().toLowerCase();
+          const rj = showsFilterForm.rj.value.trim().toLowerCase();
+          const day = showsFilterForm.day.value.trim().toLowerCase();
+
+          let visibleCount = 0;
+          let firstMatch = null;
+
+          showCards.forEach(card => {
+            const cardGenre = card.getAttribute('data-genre').toLowerCase();
+            const cardRj = card.getAttribute('data-rj').toLowerCase();
+            const cardDay = card.getAttribute('data-day').toLowerCase();
+
+            const genreMatch = !genre || cardGenre === genre;
+            const rjMatch = !rj || cardRj === rj;
+            const dayMatch = !day || cardDay === day;
+
+            if (genreMatch && rjMatch && dayMatch) {
+              card.style.display = '';
+              visibleCount++;
+              if (!firstMatch) firstMatch = card;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Update current show card based on first match if any filter applied, else default show
+          if ((genre || rj || day) && firstMatch) {
+            currentShowImg.src = firstMatch.getAttribute('data-img');
+            currentShowImg.alt = firstMatch.querySelector('img').alt || 'Current Show Image';
+            currentShowTitle.textContent = firstMatch.getAttribute('data-title');
+            currentShowDesc.textContent = firstMatch.getAttribute('data-desc');
+          } else {
+            currentShowImg.src = defaultShow.img;
+            currentShowImg.alt = "RJ Maya hosting Bhuiyan Beats live show with blurred edges and warm colors";
+            currentShowTitle.textContent = defaultShow.title;
+            currentShowDesc.textContent = defaultShow.desc;
+          }
+
+          noResultsMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        // Clear filters button
+        document.getElementById('clearFiltersBtn').addEventListener('click', () => {
+          showsFilterForm.genre.value = '';
+          showsFilterForm.rj.value = '';
+          showsFilterForm.day.value = '';
+          filterShows();
+        });
+
+        // Trigger filtering on change
+        showsFilterForm.addEventListener('change', filterShows);
+
+        // Initialize display
+        filterShows();
+      })();
+   </script>
+  </section>
+  <!-- 4. PODCASTS SECTION -->
+  <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Podcast Episodes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Kalam&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    .bg-warmCream {
+      background-color: #fff8f0;
+    }
+    .text-primaryRed {
+      color: #b33a3a;
+    }
+    .font-montserrat {
+      font-family: 'Montserrat', sans-serif;
+    }
+    .font-kalam {
+      font-family: 'Kalam', cursive;
+    }
+    .podcast-card {
+      background: #fff8f0;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgb(179 58 58 / 0.25);
+      padding: 1rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      outline-offset: 4px;
+      position: relative;
+      border-bottom: none !important;
+      outline: none;
+    }
+    .podcast-card:focus,
+    .podcast-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgb(179 58 58 / 0.4);
+      outline: none;
+      border-bottom: none !important;
+      text-decoration: none;
+    }
+    .podcast-card img {
+      border-radius: 10px;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      margin-bottom: 0.75rem;
+      user-select: none;
+      pointer-events: none;
+    }
+    .podcast-title {
+      font-weight: 700;
+      color: #b33a3a;
+      margin-bottom: 0.25rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .podcast-tag {
+      font-family: 'Kalam', cursive;
+      font-size: 0.85rem;
+      color: #a04545;
+      margin-bottom: 0.75rem;
+    }
+    .podcast-info {
+      font-family: 'Kalam', cursive;
+      font-size: 0.8rem;
+      color: #5a2a2a;
+      margin-bottom: 0.75rem;
+    }
+    .podcast-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .podcast-controls button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #228b22;
+      transition: color 0.2s ease;
+      font-size: 1.2rem;
+      padding: 0;
+      line-height: 1;
+    }
+    .podcast-controls button.play-btn {
+      color: #b33a3a;
+    }
+    .podcast-controls button:hover,
+    .podcast-controls button:focus {
+      color: #b33a3a;
+      outline: none;
+    }
+    .podcast-controls a.download-btn {
+      color: #b33a3a;
+      font-size: 1.2rem;
+      text-decoration: none;
+    }
+    .waveform {
+      height: 30px;
+      background: linear-gradient(90deg, #b33a3a 20%, #eea9a9 50%, #b33a3a 80%);
+      border-radius: 10px;
+      margin-top: 0.75rem;
+      opacity: 0.3;
+      transition: opacity 0.3s ease;
+    }
+    .waveform.playing {
+      animation: waveformPulse 1s infinite;
+      opacity: 1;
+      background-size: 200% 100%;
+    }
+    @keyframes waveformPulse {
+      0%, 100% { background-position: 0% 0; }
+      50% { background-position: 100% 0; }
+    }
+  </style>
+</head>
+<body class="bg-warmCream">
+  <section aria-label="Podcast episodes section" class="max-w-7xl mx-auto px-6 py-16" id="podcasts">
+    <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed" style="color:#B33A3A;">
+      Missed it? We saved it.
+    </h2>
+    <form aria-label="Filter and search podcasts" class="flex flex-col sm:flex-row gap-4 mb-12 max-w-4xl" id="podcastFilterForm">
+      <input aria-label="Search podcasts" autocomplete="off" class="flex-grow rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed font-montserrat" id="podcastSearchInput" placeholder="Search podcasts..." type="search" />
+      <select aria-label="Filter by Tag" class="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed font-montserrat" id="podcastTagSelect" name="tag">
+        <option value="">
+          Filter by Tag
+        </option>
+        <option value="folktales">
+          #FolkTales
+        </option>
+        <option value="desitalks">
+          #DesiTalks
+        </option>
+        <option value="retrobeats">
+          #RetroBeats
+        </option>
+      </select>
+    </form>
+    <div aria-live="polite" class="grid gap-6 mb-8" id="podcastGrid" role="list" style="grid-template-columns: repeat(auto-fill,minmax(280px,1fr));">
+    </div>
+    <audio aria-label="Podcast audio player" id="podcastAudioPlayer" preload="none"></audio>
+
+    <script>
+      const podcasts = [
+        {
+          title: "Folk Tales of Chhattisgarh",
+          tag: "folktales",
+          img: "https://storage.googleapis.com/a1aa/image/e6b62443-b4a8-43dc-a0e3-5db48d679579.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Folk+Tales+Audio",
+          alt: "Tape recorder style cover art showing folk tales of Chhattisgarh with traditional motifs",
+          duration: "32:15",
+          publishDate: "2024-04-10",
+        },
+        {
+          title: "Desi Talks with RJ Maya",
+          tag: "desitalks",
+          img: "https://storage.googleapis.com/a1aa/image/7abc3195-ef5c-4733-bd38-0a2a743cef63.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Desi+Talks+Audio",
+          alt: "Tape recorder style cover art showing Desi Talks podcast with RJ Maya",
+          duration: "28:40",
+          publishDate: "2024-05-05",
+        },
+        {
+          title: "Retro Beats Collection",
+          tag: "retrobeats",
+          img: "https://storage.googleapis.com/a1aa/image/532fabe6-6def-44d0-7894-0e542543900b.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Retro+Beats+Audio",
+          alt: "Tape recorder style cover art showing retro beats music collection",
+          duration: "45:20",
+          publishDate: "2024-03-20",
+        },
+        {
+          title: "Folk Rhythms Special",
+          tag: "folktales",
+          img: "https://storage.googleapis.com/a1aa/image/91c03c13-3d88-48a1-e82f-b7da5b025016.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Folk+Rhythms+Audio",
+          alt: "Tape recorder style cover art showing folk rhythms special episode",
+          duration: "38:05",
+          publishDate: "2024-04-22",
+        },
+        {
+          title: "Desi Retro Vibes",
+          tag: "retrobeats",
+          img: "https://storage.googleapis.com/a1aa/image/7df91190-d2f4-41bd-e42a-92767546e38b.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Desi+Retro+Vibes+Audio",
+          alt: "Tape recorder style cover art showing desi retro vibes music podcast",
+          duration: "50:10",
+          publishDate: "2024-06-01",
+        },
+        {
+          title: "Chhattisgarh Folk Stories",
+          tag: "folktales",
+          img: "https://storage.googleapis.com/a1aa/image/8e4a2952-6d45-4e8e-915f-3c5a536209ea.jpg",
+          audioUrl: "https://placehold.co/400x100?text=Folk+Stories+Audio",
+          alt: "Tape recorder style cover art showing Chhattisgarh folk stories podcast",
+          duration: "29:50",
+          publishDate: "2024-05-15",
+        },
+      ];
+
+      const podcastGrid = document.getElementById("podcastGrid");
+      const searchInput = document.getElementById("podcastSearchInput");
+      const tagSelect = document.getElementById("podcastTagSelect");
+      const audioPlayer = document.getElementById("podcastAudioPlayer");
+      let currentlyPlaying = null;
+
+      function createPodcastCard(podcast) {
+        const article = document.createElement("article");
+        article.className = "podcast-card";
+        article.setAttribute("tabindex", "0");
+        article.setAttribute("aria-label", `${podcast.title} podcast episode. Duration ${podcast.duration}. Published on ${podcast.publishDate}.`);
+        article.dataset.title = podcast.title.toLowerCase();
+        article.dataset.tag = podcast.tag;
+        article.dataset.audioUrl = podcast.audioUrl;
+
+        article.innerHTML = `
+          <img src="${podcast.img}" alt="${podcast.alt}" loading="lazy" />
+          <h3 class="podcast-title">${podcast.title}</h3>
+          <p class="podcast-tag">#${podcast.tag.charAt(0).toUpperCase() + podcast.tag.slice(1)}</p>
+          <p class="podcast-info">Duration: ${podcast.duration} | Date: ${podcast.publishDate}</p>
+          <div class="podcast-controls">
+            <button class="play-btn" aria-label="Play ${podcast.title} podcast" title="Play/Pause" type="button">
+              ▶️
+            </button>
+            <a href="${podcast.audioUrl}" download class="download-btn" aria-label="Download ${podcast.title} podcast" title="Download Podcast" role="link">⬇️</a>
+          </div>
+          <div class="waveform" aria-hidden="true"></div>
+        `;
+
+        const playBtn = article.querySelector(".play-btn");
+        const waveform = article.querySelector(".waveform");
+
+        playBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (currentlyPlaying === podcast.audioUrl) {
+            if (audioPlayer.paused) {
+              audioPlayer.play();
+              waveform.classList.add("playing");
+              playBtn.textContent = "⏸️";
+            } else {
+              audioPlayer.pause();
+              waveform.classList.remove("playing");
+              playBtn.textContent = "▶️";
+            }
+          } else {
+            if (currentlyPlaying) {
+              const oldCard = [...podcastGrid.children].find(card => card.dataset.audioUrl === currentlyPlaying);
+              if (oldCard) {
+                oldCard.querySelector(".waveform").classList.remove("playing");
+                oldCard.querySelector(".play-btn").textContent = "▶️";
+              }
+            }
+            audioPlayer.src = podcast.audioUrl;
+            audioPlayer.play();
+            currentlyPlaying = podcast.audioUrl;
+
+            [...podcastGrid.children].forEach(card => {
+              card.querySelector(".waveform").classList.remove("playing");
+              card.querySelector(".play-btn").textContent = "▶️";
+            });
+
+            waveform.classList.add("playing");
+            playBtn.textContent = "⏸️";
+          }
+        });
+
+        article.addEventListener("click", () => {
+          playBtn.click();
+        });
+
+        // Remove focus outline and border-bottom line on keyboard focus and hover
+        article.addEventListener("focus", () => {
+          article.style.outline = "none";
+          article.style.borderBottom = "none";
+        });
+        article.addEventListener("blur", () => {
+          article.style.outline = "none";
+          article.style.borderBottom = "none";
+        });
+
+        return article;
+      }
+
+      function renderPodcasts() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedTag = tagSelect.value;
+
+        podcastGrid.innerHTML = "";
+
+        const filteredPodcasts = podcasts.filter(p => {
+          const matchesSearch = p.title.toLowerCase().includes(searchTerm);
+          const matchesTag = selectedTag === "" || p.tag === selectedTag;
+          return matchesSearch && matchesTag;
+        });
+
+        if (filteredPodcasts.length === 0) {
+          podcastGrid.innerHTML = `<p class="text-center text-gray-500 font-montserrat">No podcasts found.</p>`;
+          return;
+        }
+
+        filteredPodcasts.forEach(podcast => {
+          const card = createPodcastCard(podcast);
+          podcastGrid.appendChild(card);
+        });
+      }
+
+      audioPlayer.addEventListener("ended", () => {
+        currentlyPlaying = null;
+        [...podcastGrid.children].forEach(card => {
+          card.querySelector(".waveform").classList.remove("playing");
+          card.querySelector(".play-btn").textContent = "▶️";
+        });
+      });
+
+      searchInput.addEventListener("input", renderPodcasts);
+      tagSelect.addEventListener("change", renderPodcasts);
+
+      renderPodcasts();
+    </script>
+  </section>
+</body>
+</html>
+  <!-- 5. MOMENTS FROM RAIPURIYA -->
+  <section aria-label="Moments from Raipuriya photo gallery and Instagram reels" class="max-w-7xl mx-auto px-6 py-16 bg-warmCream relative" id="moments">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed text-center" style="color:#B33A3A;">
+    Live with You
+   </h2>
+   <!-- Polaroid-style grid -->
+   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 0s;">
+     <img alt="User-submitted photo showing a group of people dancing at Raipuriya cultural event with traditional attire" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/8cd4f990-f6ce-419d-a5db-03d8fd72dada.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Raipuriya Dance Night
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 1s;">
+     <img alt="User-submitted photo showing a closeup of traditional musical instruments played during Raipuriya festival" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/85de362b-bd2a-4833-86a7-dbad4cf552f1.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Traditional Instruments
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 2s;">
+     <img alt="User-submitted photo showing a crowd enjoying a live Raipuriya music concert with colorful lights" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/a7d1c352-41a6-4c3e-1777-91834c0f928d.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Live Concert Crowd
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 3s;">
+     <img alt="User-submitted photo showing a smiling radio jockey interacting with listeners at Raipuriya event" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b72a47c0-5020-43c9-5db3-cbc3bc3a6c37.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      RJ Maya with Listeners
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 4s;">
+     <img alt="User-submitted photo showing traditional dancers performing on stage during Raipuriya festival" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ce2b7364-9fb5-4223-e617-6683f88d5427.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Stage Performance
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 5s;">
+     <img alt="User-submitted photo showing colorful decorations and lights at Raipuriya cultural event" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/4e695155-c115-49cb-251b-1a86693fc0d2.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Festival Decorations
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 6s;">
+     <img alt="User-submitted photo showing a group of musicians playing folk instruments on stage" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/bd68785a-95e3-4c24-c599-d34c6ed8fb6c.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Folk Musicians
+     </div>
+    </div>
+    <div class="relative bg-white rounded-lg shadow-lg p-3 float-anim" style="animation-delay: 7s;">
+     <img alt="User-submitted photo showing audience clapping and enjoying Raipuriya event" class="rounded-lg object-cover w-full h-64" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/43ebb70d-fd6a-48dc-03b1-697c50f7f35b.jpg" width="300"/>
+     <div class="mt-2 font-kalam text-center text-forestGreen font-semibold">
+      Happy Audience
+     </div>
+    </div>
+   </div>
+   <!-- Send Yours Button -->
+   <div class="mt-10 text-center">
+    <button aria-controls="uploadModal" aria-haspopup="dialog" class="inline-flex items-center gap-2 bg-primaryRed hover:bg-red-700 text-warmCream font-semibold rounded-full px-8 py-3 shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="uploadBtn" style="background-color:#B33A3A;" type="button">
+     <i aria-hidden="true" class="fas fa-upload">
+     </i>
+     Send Yours
+    </button>
+   </div>
+   <!-- Embedded IG Reels -->
+   <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8">
+    <iframe allow="autoplay; encrypted-media" allowfullscreen="" class="w-full h-96 rounded-lg shadow-lg" loading="lazy" src="https://www.instagram.com/reel/Cq1Xq6XJ6qX/embed" title="Instagram Reel from Raipuriya Station Event 1">
+    </iframe>
+    <iframe allow="autoplay; encrypted-media" allowfullscreen="" class="w-full h-96 rounded-lg shadow-lg" loading="lazy" src="https://www.instagram.com/reel/Cp9Xq7YJ7rY/embed" title="Instagram Reel from Raipuriya Station Event 2">
+    </iframe>
+   </div>
+   <!-- Upload Modal -->
+   <div aria-labelledby="uploadModalTitle" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="uploadModal" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="uploadModalTitle" style="color:#B33A3A;">
+      Upload Your Photo
+     </h3>
+     <form id="uploadForm">
+      <label class="block mb-2 font-semibold text-forestGreen" for="photoUpload">
+       Select photo to upload:
+      </label>
+      <input accept="image/*" class="mb-4 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="photoUpload" name="photoUpload" required="" type="file"/>
+      <label class="block mb-2 font-semibold text-forestGreen" for="description">
+       Description (optional):
+      </label>
+      <textarea class="mb-4 w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="description" name="description" placeholder="Tell us about your photo..." rows="3"></textarea>
+      <div class="flex justify-end gap-4">
+       <button class="px-4 py-2 rounded-full bg-gray-300 hover:bg-gray-400 text-forestGreen font-semibold focus:outline-none focus:ring-2 focus:ring-gray-400" id="cancelUpload" type="button">
+        Cancel
+       </button>
+       <button class="px-4 py-2 rounded-full bg-primaryRed hover:bg-red-700 text-warmCream font-semibold focus:outline-none focus:ring-2 focus:ring-primaryRed" style="background-color:#B33A3A;" type="submit">
+        Upload
+       </button>
+      </div>
+     </form>
+    </div>
+   </div>
+   <script>
+    const uploadBtn = document.getElementById('uploadBtn');
+      const uploadModal = document.getElementById('uploadModal');
+      const cancelUpload = document.getElementById('cancelUpload');
+      const uploadForm = document.getElementById('uploadForm');
+
+      uploadBtn.addEventListener('click', () => {
+        uploadModal.classList.remove('hidden');
+        uploadModal.querySelector('input, textarea, button').focus();
+      });
+      cancelUpload.addEventListener('click', () => {
+        uploadModal.classList.add('hidden');
+        uploadForm.reset();
+        uploadBtn.focus();
+      });
+      uploadModal.addEventListener('click', (e) => {
+        if (e.target === uploadModal) {
+          uploadModal.classList.add('hidden');
+          uploadForm.reset();
+          uploadBtn.focus();
+        }
+      });
+
+      uploadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('photoUpload');
+        const descriptionInput = document.getElementById('description');
+
+        if (!fileInput.files.length) {
+          alert("Please select a photo to upload.");
+          return;
+        }
+
+        // Backend required: Upload photo and description to server
+        // Example: Use FormData and fetch API to send to backend endpoint
+
+        const formData = new FormData();
+        formData.append('photo', fileInput.files[0]);
+        formData.append('description', descriptionInput.value);
+
+        fetch('/api/upload-photo', {
+          method: 'POST',
+          body: formData
+        }).then(response => {
+          if (response.ok) {
+            alert("Photo uploaded successfully! Thank you for sharing.");
+            uploadModal.classList.add('hidden');
+            uploadForm.reset();
+            uploadBtn.focus();
+            // Optionally refresh moments section or add new photo dynamically
+          } else {
+            alert("Failed to upload photo. Please try again later.");
+          }
+        }).catch(error => {
+          console.error(error);
+          alert("An error occurred during upload.");
+        });
+      });
+   </script>
+  </section>
+  <!-- 6. EVENTS & FESTIVALS -->
+  <section aria-label="Events and festivals calendar" class="max-w-7xl mx-auto px-6 py-16 bg-warmCream" id="events">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed" style="color:#B33A3A;">
+    Culture Calendar
+   </h2>
+   <!-- Horizontal timeline slider -->
+   <div aria-label="Events timeline slider" class="overflow-x-auto scrollbar-hide" tabindex="0">
+    <div class="flex gap-6 min-w-max">
+     <!-- Event Card 1 -->
+     <button aria-controls="eventModal1" aria-haspopup="dialog" aria-label="Open details for Chhattisgarh Tribal Festival" class="relative flex-shrink-0 w-64 bg-white rounded-lg shadow-lg p-4 border-2 border-transparent hover:border-primaryRed focus:outline-none focus:ring-2 focus:ring-primaryRed festival-mode" style="transition: border-color 0.3s;" type="button">
+      <img alt="Poster image of Chhattisgarh Tribal Festival with dancers and colorful costumes" class="rounded-md mb-3 object-cover w-full h-36" height="144" loading="lazy" src="https://storage.googleapis.com/a1aa/image/0be22f58-06c9-4012-a8a5-b8a922d4bce3.jpg" width="256"/>
+      <h3 class="font-bold text-primaryRed mb-1" style="color:#B33A3A;">
+       Chhattisgarh Tribal Festival
+      </h3>
+      <p class="text-sm font-kalam text-forestGreen mb-1">
+       Dec 10 - Dec 15
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       Multiple Artists
+      </p>
+     </button>
+     <!-- Event Card 2 -->
+     <button aria-controls="eventModal2" aria-haspopup="dialog" aria-label="Open details for Raipuriya Music Night" class="relative flex-shrink-0 w-64 bg-white rounded-lg shadow-lg p-4 border-2 border-transparent hover:border-primaryRed focus:outline-none focus:ring-2 focus:ring-primaryRed festival-mode" type="button">
+      <img alt="Poster image of Raipuriya Music Night with stage and instruments" class="rounded-md mb-3 object-cover w-full h-36" height="144" loading="lazy" src="https://storage.googleapis.com/a1aa/image/c9e170b6-13ff-4120-2da0-611b58c82d91.jpg" width="256"/>
+      <h3 class="font-bold text-primaryRed mb-1" style="color:#B33A3A;">
+       Raipuriya Music Night
+      </h3>
+      <p class="text-sm font-kalam text-forestGreen mb-1">
+       Jan 5
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       RJ Maya &amp; Friends
+      </p>
+     </button>
+     <!-- Event Card 3 -->
+     <button aria-controls="eventModal3" aria-haspopup="dialog" aria-label="Open details for Folk Music Marathon" class="relative flex-shrink-0 w-64 bg-white rounded-lg shadow-lg p-4 border-2 border-transparent hover:border-primaryRed focus:outline-none focus:ring-2 focus:ring-primaryRed festival-mode" type="button">
+      <img alt="Poster image of Folk Music Marathon with musicians playing traditional instruments" class="rounded-md mb-3 object-cover w-full h-36" height="144" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ad29a3e8-0efa-4584-96c6-14a8e8e0a0bc.jpg" width="256"/>
+      <h3 class="font-bold text-primaryRed mb-1" style="color:#B33A3A;">
+       Folk Music Marathon
+      </h3>
+      <p class="text-sm font-kalam text-forestGreen mb-1">
+       Feb 20 - Feb 22
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       Various Artists
+      </p>
+     </button>
+     <!-- Event Card 4 -->
+     <button aria-controls="eventModal4" aria-haspopup="dialog" aria-label="Open details for Raipuriya Folk Dance Fest" class="relative flex-shrink-0 w-64 bg-white rounded-lg shadow-lg p-4 border-2 border-transparent hover:border-primaryRed focus:outline-none focus:ring-2 focus:ring-primaryRed festival-mode" type="button">
+      <img alt="Poster image of Raipuriya Folk Dance Fest with dancers in traditional attire" class="rounded-md mb-3 object-cover w-full h-36" height="144" loading="lazy" src="https://storage.googleapis.com/a1aa/image/169d9f5c-a269-4e0c-1fc7-654e974e0e2a.jpg" width="256"/>
+      <h3 class="font-bold text-primaryRed mb-1" style="color:#B33A3A;">
+       Raipuriya Folk Dance Fest
+      </h3>
+      <p class="text-sm font-kalam text-forestGreen mb-1">
+       Mar 10 - Mar 12
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       Dance Troupes
+      </p>
+     </button>
+     <!-- Event Card 5 -->
+     <button aria-controls="eventModal5" aria-haspopup="dialog" aria-label="Open details for Raipuriya Retro Night" class="relative flex-shrink-0 w-64 bg-white rounded-lg shadow-lg p-4 border-2 border-transparent hover:border-primaryRed focus:outline-none focus:ring-2 focus:ring-primaryRed festival-mode" type="button">
+      <img alt="Poster image of Raipuriya Retro Night with vintage music theme" class="rounded-md mb-3 object-cover w-full h-36" height="144" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ed039732-ca05-4dfc-c9db-268fb64a6c79.jpg" width="256"/>
+      <h3 class="font-bold text-primaryRed mb-1" style="color:#B33A3A;">
+       Raipuriya Retro Night
+      </h3>
+      <p class="text-sm font-kalam text-forestGreen mb-1">
+       Apr 5
+      </p>
+      <p class="text-sm font-semibold text-forestGreen">
+       RJ Ravi
+      </p>
+     </button>
+    </div>
+   </div>
+   <!-- Event Modals -->
+   <div aria-labelledby="eventModalTitle1" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="eventModal1" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="eventModalTitle1" style="color:#B33A3A;">
+      Chhattisgarh Tribal Festival
+     </h3>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Celebrate the rich tribal heritage of Chhattisgarh with traditional dances, music, and crafts. Featuring artists from across the state.
+     </p>
+     <p class="mb-2 font-semibold text-forestGreen">
+      Schedule:
+     </p>
+     <ul class="list-disc list-inside mb-4 text-forestGreen font-kalam">
+      <li>
+       Dec 10: Opening Ceremony &amp; Dance Performances
+      </li>
+      <li>
+       Dec 11-14: Workshops &amp; Music Shows
+      </li>
+      <li>
+       Dec 15: Closing Gala
+      </li>
+     </ul>
+     <p class="mb-4 font-semibold text-forestGreen">
+      Tickets:
+     </p>
+     <p class="mb-6 font-kalam text-forestGreen">
+      Available online and at the venue. Early bird discounts apply.
+     </p>
+     <button aria-label="Close Chhattisgarh Tribal Festival modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('eventModal1').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="eventModalTitle2" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="eventModal2" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="eventModalTitle2" style="color:#B33A3A;">
+      Raipuriya Music Night
+     </h3>
+     <p class="mb-4 font-kalam text-forestGreen">
+      An enchanting night of folk and contemporary music hosted by RJ Maya and friends. Experience the soul of Raipuriya culture.
+     </p>
+     <p class="mb-2 font-semibold text-forestGreen">
+      Schedule:
+     </p>
+     <ul class="list-disc list-inside mb-4 text-forestGreen font-kalam">
+      <li>
+       Jan 5: 7 PM - 11 PM
+      </li>
+     </ul>
+     <p class="mb-4 font-semibold text-forestGreen">
+      Tickets:
+     </p>
+     <p class="mb-6 font-kalam text-forestGreen">
+      Available at the station and online.
+     </p>
+     <button aria-label="Close Raipuriya Music Night modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('eventModal2').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="eventModalTitle3" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="eventModal3" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="eventModalTitle3" style="color:#B33A3A;">
+      Folk Music Marathon
+     </h3>
+     <p class="mb-4 font-kalam text-forestGreen">
+      A three-day marathon featuring the best folk musicians from Chhattisgarh and beyond. Immerse yourself in timeless melodies.
+     </p>
+     <p class="mb-2 font-semibold text-forestGreen">
+      Schedule:
+     </p>
+     <ul class="list-disc list-inside mb-4 text-forestGreen font-kalam">
+      <li>
+       Feb 20-22: 5 PM - 11 PM daily
+      </li>
+     </ul>
+     <p class="mb-4 font-semibold text-forestGreen">
+      Tickets:
+     </p>
+     <p class="mb-6 font-kalam text-forestGreen">
+      Available online and at the venue.
+     </p>
+     <button aria-label="Close Folk Music Marathon modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('eventModal3').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="eventModalTitle4" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="eventModal4" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="eventModalTitle4" style="color:#B33A3A;">
+      Raipuriya Folk Dance Fest
+     </h3>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Celebrate the vibrant folk dances of Raipuriya with performances by renowned dance troupes and community groups.
+     </p>
+     <p class="mb-2 font-semibold text-forestGreen">
+      Schedule:
+     </p>
+     <ul class="list-disc list-inside mb-4 text-forestGreen font-kalam">
+      <li>
+       Mar 10-12: 6 PM - 10 PM daily
+      </li>
+     </ul>
+     <p class="mb-4 font-semibold text-forestGreen">
+      Tickets:
+     </p>
+     <p class="mb-6 font-kalam text-forestGreen">
+      Available at the venue and online.
+     </p>
+     <button aria-label="Close Raipuriya Folk Dance Fest modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('eventModal4').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="eventModalTitle5" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="eventModal5" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-lg w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="eventModalTitle5" style="color:#B33A3A;">
+      Raipuriya Retro Night
+     </h3>
+     <p class="mb-4 font-kalam text-forestGreen">
+      A nostalgic night of retro music and stories hosted by RJ Ravi. Relive the golden era of Raipuriya radio.
+     </p>
+     <p class="mb-2 font-semibold text-forestGreen">
+      Schedule:
+     </p>
+     <ul class="list-disc list-inside mb-4 text-forestGreen font-kalam">
+      <li>
+       Apr 5: 7 PM - 11 PM
+      </li>
+     </ul>
+     <p class="mb-4 font-semibold text-forestGreen">
+      Tickets:
+     </p>
+     <p class="mb-6 font-kalam text-forestGreen">
+      Available online and at the station.
+     </p>
+     <button aria-label="Close Raipuriya Retro Night modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('eventModal5').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <script>
+    // Open modals on event card click
+      document.querySelectorAll('[aria-haspopup="dialog"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const modalId = btn.getAttribute('aria-controls');
+          document.getElementById(modalId).classList.remove('hidden');
+          document.getElementById(modalId).querySelector('button[aria-label^="Close"]').focus();
+        });
+      });
+      // Close modals on clicking outside or close button handled inline
+      document.querySelectorAll('.fixed[role="dialog"]').forEach((modal) => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.add('hidden');
+          }
+        });
+      });
+
+      // Festival mode color switch + sound on hover
+      document.querySelectorAll('.festival-mode').forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          el.style.backgroundColor = '#B33A3A';
+          el.style.color = '#FFF8E7';
+          // Play sound effect (optional)
+          // For demo, no sound included
+        });
+        el.addEventListener('mouseleave', () => {
+          el.style.backgroundColor = '';
+          el.style.color = '';
+        });
+      });
+   </script>
+  </section>
+  <!-- 7. ABOUT + HISTORY -->
+  <section aria-label="About and history of the radio station" class="max-w-5xl mx-auto px-6 py-16 bg-warmCream relative" id="about">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed text-center" style="color:#B33A3A;">
+    From Mic to Memory
+   </h2>
+   <article class="space-y-16 text-forestGreen font-kalam leading-relaxed">
+    <div class="flex flex-col md:flex-row items-center gap-8">
+     <img alt="Parallax image of an old radio studio with vintage microphones and equipment" class="w-full md:w-1/2 rounded-lg shadow-lg object-cover" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/542720d3-8c20-40ac-ca4d-db1da900b070.jpg" width="400"/>
+     <p class="md:w-1/2 text-lg">
+      📻 Serving Chhattisgarh Since 2009, our station has been the heartbeat of local culture, bringing folk music, stories, and voices to your ears. From humble beginnings in a small studio, we have grown into a community hub that celebrates tradition and innovation.
+     </p>
+    </div>
+    <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+     <img alt="Parallax image of a vintage microphone closeup with warm lighting" class="w-full md:w-1/2 rounded-lg shadow-lg object-cover" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/f367148c-dc1f-4618-3471-0b41fb73f419.jpg" width="400"/>
+     <p class="md:w-1/2 text-lg">
+      Our beloved RJs have been the voices that connect generations. Their passion and dedication have made every broadcast a journey through the rich tapestry of Chhattisgarh’s heritage.
+     </p>
+    </div>
+    <div class="flex flex-col md:flex-row items-center gap-8">
+     <img alt="Parallax image of RJ recording a session in the studio with headphones and microphone" class="w-full md:w-1/2 rounded-lg shadow-lg object-cover" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/8ad32140-540b-4d3e-14c5-b16a32972306.jpg" width="400"/>
+     <p class="md:w-1/2 text-lg">
+      With every story told and every song played, we keep the spirit of Raipuriya alive. Join us as we continue this journey from mic to memory, blending nostalgia with new age vibes.
+     </p>
+    </div>
+   </article>
+  </section>
+  <!-- 8. RJ GALLERY -->
+  <section aria-label="Radio jockey gallery" class="max-w-7xl mx-auto px-6 py-16 bg-warmCream" id="rj-gallery">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed text-center" style="color:#B33A3A;">
+    Voices of Raipuriya
+   </h2>
+   <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+    <!-- RJ Card 1 -->
+    <div aria-controls="rjModal1" aria-haspopup="dialog" aria-label="Know RJ Maya" class="relative group cursor-pointer rounded-full overflow-hidden shadow-lg ring-2 ring-transparent focus:outline-none focus:ring-primaryRed" role="button" tabindex="0">
+     <img alt="Portrait photo of RJ Maya smiling with microphone in radio studio" class="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-105" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/47c2c916-b9f6-4e71-6766-aa3028d20771.jpg" width="300"/>
+     <div class="absolute inset-0 bg-primaryRed bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" style="background-color:#B33A3A;">
+      <span class="text-warmCream font-semibold text-lg font-kalam">
+       🎤 Know RJ Maya
+      </span>
+     </div>
+    </div>
+    <!-- RJ Card 2 -->
+    <div aria-controls="rjModal2" aria-haspopup="dialog" aria-label="Know RJ Ravi" class="relative group cursor-pointer rounded-full overflow-hidden shadow-lg ring-2 ring-transparent focus:outline-none focus:ring-primaryRed" role="button" tabindex="0">
+     <img alt="Portrait photo of RJ Ravi with headphones and warm smile in radio studio" class="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-105" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1d03e5af-def5-4aeb-96ab-02199bbf33e6.jpg" width="300"/>
+     <div class="absolute inset-0 bg-primaryRed bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" style="background-color:#B33A3A;">
+      <span class="text-warmCream font-semibold text-lg font-kalam">
+       🎤 Know RJ Ravi
+      </span>
+     </div>
+    </div>
+    <!-- RJ Card 3 -->
+    <div aria-controls="rjModal3" aria-haspopup="dialog" aria-label="Know RJ Neha" class="relative group cursor-pointer rounded-full overflow-hidden shadow-lg ring-2 ring-transparent focus:outline-none focus:ring-primaryRed" role="button" tabindex="0">
+     <img alt="Portrait photo of RJ Neha with cheerful expression in radio studio" class="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-105" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/b5275cd7-92c5-4b9b-0df5-aa084d936041.jpg" width="300"/>
+     <div class="absolute inset-0 bg-primaryRed bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" style="background-color:#B33A3A;">
+      <span class="text-warmCream font-semibold text-lg font-kalam">
+       🎤 Know RJ Neha
+      </span>
+     </div>
+    </div>
+    <!-- RJ Card 4 -->
+    <div aria-controls="rjModal4" aria-haspopup="dialog" aria-label="Know RJ Amit" class="relative group cursor-pointer rounded-full overflow-hidden shadow-lg ring-2 ring-transparent focus:outline-none focus:ring-primaryRed" role="button" tabindex="0">
+     <img alt="Portrait photo of RJ Amit with confident smile in radio studio" class="w-full h-full object-cover rounded-full transition-transform duration-300 group-hover:scale-105" height="300" loading="lazy" src="https://storage.googleapis.com/a1aa/image/60e7791c-87df-44c0-13bd-9499e88b500a.jpg" width="300"/>
+     <div class="absolute inset-0 bg-primaryRed bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full" style="background-color:#B33A3A;">
+      <span class="text-warmCream font-semibold text-lg font-kalam">
+       🎤 Know RJ Amit
+      </span>
+     </div>
+    </div>
+   </div>
+   <!-- RJ Modals -->
+   <div aria-labelledby="rjModalTitle1" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="rjModal1" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-md w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="rjModalTitle1" style="color:#B33A3A;">
+      RJ Maya
+     </h3>
+     <p class="mb-2 font-kalam text-forestGreen">
+      Favorite Songs: Bhuiyan Beats, Folk Fusion, Raipuriya Rhythms
+     </p>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Shows: Bhuiyan Beats, Desi Talks, Culture Hour
+     </p>
+     <button aria-label="Close RJ Maya modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('rjModal1').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="rjModalTitle2" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="rjModal2" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-md w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="rjModalTitle2" style="color:#B33A3A;">
+      RJ Ravi
+     </h3>
+     <p class="mb-2 font-kalam text-forestGreen">
+      Favorite Songs: Folk Fiesta, Retro Beats, Love Lines
+     </p>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Shows: Folk Fiesta, Raipuriya Retro Night, Evening Melodies
+     </p>
+     <button aria-label="Close RJ Ravi modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('rjModal2').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="rjModalTitle3" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="rjModal3" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-md w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="rjModalTitle3" style="color:#B33A3A;">
+      RJ Neha
+     </h3>
+     <p class="mb-2 font-kalam text-forestGreen">
+      Favorite Songs: Love Lines, Desi Talks, Evening Chill
+     </p>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Shows: Love Lines, Night Vibes, Weekend Specials
+     </p>
+     <button aria-label="Close RJ Neha modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('rjModal3').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <div aria-labelledby="rjModalTitle4" aria-modal="true" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 hidden z-50" id="rjModal4" role="dialog">
+    <div class="bg-warmCream rounded-lg max-w-md w-full p-6 relative shadow-lg">
+     <h3 class="text-2xl font-montserrat font-bold mb-4 text-primaryRed" id="rjModalTitle4" style="color:#B33A3A;">
+      RJ Amit
+     </h3>
+     <p class="mb-2 font-kalam text-forestGreen">
+      Favorite Songs: Raipuriya Rhythms, Folk Fusion, Night Beats
+     </p>
+     <p class="mb-4 font-kalam text-forestGreen">
+      Shows: Night Beats, Culture Hour, Weekend Wrap
+     </p>
+     <button aria-label="Close RJ Amit modal" class="absolute top-4 right-4 text-primaryRed hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-primaryRed" onclick="document.getElementById('rjModal4').classList.add('hidden')" type="button">
+      <i aria-hidden="true" class="fas fa-times fa-lg">
+      </i>
+     </button>
+    </div>
+   </div>
+   <script>
+    // RJ modal open/close
+      document.querySelectorAll('[role="button"][aria-haspopup="dialog"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const modalId = btn.getAttribute('aria-controls');
+          document.getElementById(modalId).classList.remove('hidden');
+          document.getElementById(modalId).querySelector('button[aria-label^="Close"]').focus();
+        });
+      });
+      document.querySelectorAll('.fixed[role="dialog"]').forEach((modal) => {
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.classList.add('hidden');
+          }
+        });
+      });
+   </script>
+  </section>
+  <!-- 9. COMMUNITY + FEEDBACK -->
+  <section aria-label="Community feedback and listener quotes" class="max-w-7xl mx-auto px-6 py-16 bg-warmCream" id="community">
+   <h2 class="text-4xl font-montserrat font-bold mb-10 text-primaryRed text-center" style="color:#B33A3A;">
+    Your Voice Matters
+   </h2>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <!-- Left: Listener quotes -->
+    <div class="space-y-8">
+     <blockquote class="relative bg-white rounded-lg p-6 shadow-lg text-forestGreen font-kalam italic" tabindex="0">
+      <p>
+       "Bhuiyan Beats brings the soul of Chhattisgarh right into my home. RJ Maya’s voice is like family."
+      </p>
+      <footer class="mt-4 font-semibold">
+       - Anjali S.
+      </footer>
+      <div aria-hidden="true" class="radio-wave">
+       <svg height="20" preserveaspectratio="none" viewbox="0 0 100 20" width="100%">
+        <path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10 T100 10" fill="none" stroke="#b33a3a" stroke-dasharray="40" stroke-dashoffset="0" stroke-width="2">
+        </path>
+       </svg>
+      </div>
+     </blockquote>
+     <blockquote class="relative bg-white rounded-lg p-6 shadow-lg text-forestGreen font-kalam italic" tabindex="0">
+      <p>
+       "The shows connect me to my roots. The music, the stories, everything feels so authentic."
+      </p>
+      <footer class="mt-4 font-semibold">
+       - Ramesh K.
+      </footer>
+      <div aria-hidden="true" class="radio-wave">
+       <svg height="20" preserveaspectratio="none" viewbox="0 0 100 20" width="100%">
+        <path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10 T100 10" fill="none" stroke="#b33a3a" stroke-dasharray="40" stroke-dashoffset="0" stroke-width="2">
+        </path>
+       </svg>
+      </div>
+     </blockquote>
+     <blockquote class="relative bg-white rounded-lg p-6 shadow-lg text-forestGreen font-kalam italic" tabindex="0">
+      <p>
+       "I love the community vibe here. The feedback form is fun and reminds me of old cassette players."
+      </p>
+      <footer class="mt-4 font-semibold">
+       - Priya M.
+      </footer>
+      <div aria-hidden="true" class="radio-wave">
+       <svg height="20" preserveaspectratio="none" viewbox="0 0 100 20" width="100%">
+        <path d="M0 10 Q10 0 20 10 T40 10 T60 10 T80 10 T100 10" fill="none" stroke="#b33a3a" stroke-dasharray="40" stroke-dashoffset="0" stroke-width="2">
+        </path>
+       </svg>
+      </div>
+     </blockquote>
+    </div>
+    <!-- Right: Feedback form styled like cassette player -->
+    <form aria-label="Listener feedback form" class="bg-white rounded-lg shadow-lg p-6 relative font-kalam text-forestGreen overflow-hidden" id="feedbackForm" novalidate="">
+     <!-- Cassette background behind form content -->
+     <img alt="Decorative cassette tape background behind feedback form" aria-hidden="true" class="absolute top-0 left-0 w-full h-full object-cover opacity-10 pointer-events-none select-none" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/2db95bc2-5a27-4fad-b43a-8509eb7cac71.jpg" width="600"/>
+     <!-- Content wrapper with relative z-index -->
+     <div class="relative z-10">
+      <h3 class="text-2xl font-montserrat font-bold mb-6 text-primaryRed" style="color:#B33A3A;">
+       Send Your Feedback
+      </h3>
+      <div class="mb-4">
+       <label class="block mb-1 font-semibold" for="name">
+        Name
+       </label>
+       <input autocomplete="name" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="name" name="name" required="" type="text"/>
+      </div>
+      <div class="mb-4">
+       <label class="block mb-1 font-semibold" for="email">
+        Email
+       </label>
+       <input autocomplete="email" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="email" name="email" required="" type="email"/>
+      </div>
+      <div class="mb-4">
+       <label class="block mb-1 font-semibold" for="message">
+        Message
+       </label>
+       <textarea class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primaryRed" id="message" name="message" required="" rows="4"></textarea>
+      </div>
+      <button class="w-full bg-primaryRed hover:bg-red-700 text-warmCream font-semibold rounded-full px-6 py-3 shadow-md transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primaryRed" style="background-color:#B33A3A;" type="submit">
+       Submit
+      </button>
+     </div>
+    </form>
+   </div>
+   <script>
+    const feedbackForm = document.getElementById('feedbackForm');
+
+      feedbackForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        if (!feedbackForm.checkValidity()) {
+          feedbackForm.reportValidity();
+          return;
+        }
+
+        const formData = {
+          name: feedbackForm.name.value.trim(),
+          email: feedbackForm.email.value.trim(),
+          message: feedbackForm.message.value.trim()
+        };
+
+        // Backend required: Submit feedback data to server
+        // Example: POST /api/feedback with JSON payload
+
+        fetch('/api/feedback', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        }).then(response => {
+          if (response.ok) {
+            alert("Thank you for your feedback!");
+            feedbackForm.reset();
+          } else {
+            alert("Failed to submit feedback. Please try again later.");
+          }
+        }).catch(error => {
+          console.error(error);
+          alert("An error occurred while submitting feedback.");
+        });
+      });
+   </script>
+  </section>
+  <!-- 10. FOOTER -->
+  <footer aria-label="Footer with navigation, mini player, social links, and language toggle" class="bg-black text-warmCream relative overflow-hidden">
+   <!-- Glowing radio lines -->
+   <img alt="Glowing radio lines decoration in black background" aria-hidden="true" class="w-full h-24 object-cover opacity-40" height="100" loading="lazy" src="https://storage.googleapis.com/a1aa/image/6e415220-7369-4bb9-c0b7-714c2860db5b.jpg" width="1920"/>
+   <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+    <!-- Quick Links -->
+    <nav aria-label="Footer quick links" class="flex flex-wrap gap-6 text-sm font-montserrat">
+     <a class="hover:text-primaryRed transition-colors" href="#hero" style="color:#FFF8E7;">
+      Home
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#culture" style="color:#FFF8E7;">
+      Culture
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#shows" style="color:#FFF8E7;">
+      Shows
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#podcasts" style="color:#FFF8E7;">
+      Podcasts
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#moments" style="color:#FFF8E7;">
+      Moments
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#events" style="color:#FFF8E7;">
+      Events
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#about" style="color:#FFF8E7;">
+      About
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#rj-gallery" style="color:#FFF8E7;">
+      RJs
+     </a>
+     <a class="hover:text-primaryRed transition-colors" href="#community" style="color:#FFF8E7;">
+      Community
+     </a>
+    </nav>
+    <!-- Embedded mini player -->
+    <div aria-label="Mini audio player" class="flex items-center gap-4 bg-primaryRed rounded-full px-4 py-2 shadow-lg max-w-md w-full md:w-auto" id="mini-player" style="background-color:#B33A3A;">
+     <button aria-label="Play/Pause" class="text-warmCream hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" id="miniPlayerPlayBtn" type="button">
+      <i aria-hidden="true" class="fas fa-play fa-lg" id="miniPlayerIcon">
+      </i>
+     </button>
+     <div aria-atomic="true" aria-live="polite" class="flex-1 text-warmCream font-kalam truncate" id="miniPlayerNowPlaying">
+      Now Playing: RJ Maya - Bhuiyan Beats
+     </div>
+     <button aria-label="Volume" class="text-warmCream hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" id="miniPlayerVolumeBtn" type="button">
+      <i aria-hidden="true" class="fas fa-volume-up fa-lg">
+      </i>
+     </button>
+    </div>
+    <!-- Social media icons -->
+    <div class="flex gap-6 text-warmCream text-xl">
+     <a aria-label="Facebook" class="hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" href="https://facebook.com" onmouseenter="playHoverSound()" rel="noopener noreferrer" role="link" target="_blank">
+      <i aria-hidden="true" class="fab fa-facebook-f">
+      </i>
+     </a>
+     <a aria-label="Twitter" class="hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" href="https://twitter.com" onmouseenter="playHoverSound()" rel="noopener noreferrer" role="link" target="_blank">
+      <i aria-hidden="true" class="fab fa-twitter">
+      </i>
+     </a>
+     <a aria-label="Instagram" class="hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" href="https://instagram.com" onmouseenter="playHoverSound()" rel="noopener noreferrer" role="link" target="_blank">
+      <i aria-hidden="true" class="fab fa-instagram">
+      </i>
+     </a>
+     <a aria-label="YouTube" class="hover:text-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-300" href="https://youtube.com" onmouseenter="playHoverSound()" rel="noopener noreferrer" role="link" target="_blank">
+      <i aria-hidden="true" class="fab fa-youtube">
+      </i>
+     </a>
+    </div>
+    <!-- Language toggle -->
+    <div class="flex items-center gap-3">
+     <label class="sr-only" for="languageToggle">
+      Language Toggle
+     </label>
+     <select aria-label="Select language" class="rounded-md border border-gray-300 px-3 py-1 bg-black text-warmCream focus:outline-none focus:ring-2 focus:ring-primaryRed" id="languageToggle" style="font-family: 'Montserrat', sans-serif;">
+      <option value="hi">
+       Hindi
+      </option>
+      <option selected="" value="en">
+       English
+      </option>
+      <option value="cg">
+       Chhattisgarhi
+      </option>
+     </select>
+    </div>
+   </div>
+   <script>
+    // Hover audio effect for social icons
+      const hoverAudio = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg');
+      function playHoverSound() {
+        hoverAudio.currentTime = 0;
+        hoverAudio.play();
+      }
+
+      // Mini player logic (plays live stream)
+      const miniPlayerPlayBtn = document.getElementById('miniPlayerPlayBtn');
+      const miniPlayerIcon = document.getElementById('miniPlayerIcon');
+      const miniPlayerNowPlaying = document.getElementById('miniPlayerNowPlaying');
+
+      // Use the same liveAudio from hero section for consistency
+      // If not playing, play; if playing, pause
+      miniPlayerPlayBtn.addEventListener('click', () => {
+        if (!isPlaying) {
+          liveAudio.play().then(() => {
+            isPlaying = true;
+            miniPlayerIcon.classList.remove('fa-play');
+            miniPlayerIcon.classList.add('fa-pause');
+            miniPlayerNowPlaying.textContent = "Now Playing: RJ Maya - Bhuiyan Beats";
+          }).catch((err) => {
+            alert("Unable to play live stream. Please try again later.");
+            console.error(err);
+          });
+        } else {
+          liveAudio.pause();
+          isPlaying = false;
+          miniPlayerIcon.classList.remove('fa-pause');
+          miniPlayerIcon.classList.add('fa-play');
+          miniPlayerNowPlaying.textContent = "Now Playing: RJ Maya - Bhuiyan Beats";
+        }
+      });
+
+      // Volume button toggles mute/unmute
+      const miniPlayerVolumeBtn = document.getElementById('miniPlayerVolumeBtn');
+      miniPlayerVolumeBtn.addEventListener('click', () => {
+        if (liveAudio.muted) {
+          liveAudio.muted = false;
+          miniPlayerVolumeBtn.querySelector('i').classList.remove('fa-volume-mute');
+          miniPlayerVolumeBtn.querySelector('i').classList.add('fa-volume-up');
+        } else {
+          liveAudio.muted = true;
+          miniPlayerVolumeBtn.querySelector('i').classList.remove('fa-volume-up');
+          miniPlayerVolumeBtn.querySelector('i').classList.add('fa-volume-mute');
+        }
+      });
+
+      // Language toggle logic (frontend only)
+      // Backend required: localization support and content translation
+      const languageToggle = document.getElementById('languageToggle');
+      languageToggle.addEventListener('change', () => {
+        const selectedLang = languageToggle.value;
+        alert(`Language changed to ${selectedLang}. Backend integration required to load translated content.`);
+        // Implement backend API call or frontend i18n logic here
+      });
+   </script>
+  </footer>
+ </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<video id="media-player" class="hidden" playsinline="" src="https://stream.zeno.fm/tjvdomsjkyzuv?cto-uid=ce38c837-5e56-4471-96db-3f2e664f60d6-67e0dc2a-494e&amp;an-uid=3714976574480104354&amp;triton-uid=cookie%3Aebfa7746-fdb5-47d8-bf19-6223094e9eec&amp;dbm-uid=CAESEF6P-p18C9HMlLp0m6G9Muw&amp;dyn-uid=8237369708151774914&amp;ttd-uid=e3034741-e3e4-4d1a-94ca-58e1cb2a0665&amp;adtonosListenerId=01JWFWGJD079PGBNJQ2PMXJT1M&amp;aw_0_req_lsid=06360fcade8990989373c759e0abee04"></video>
